@@ -1,5 +1,6 @@
 use geng::prelude::{mat3, r32, vec2, Float, R32, R64};
 
+/// A trait for converting into an [R32].
 pub trait RealConversions {
     fn as_r32(&self) -> R32;
 }
@@ -10,11 +11,13 @@ impl<T: Float> RealConversions for T {
     }
 }
 
+/// A trait for converting [vec2]'s inner types between [f32] and [R32].
 pub trait Vec2RealConversions {
     fn as_f32(&self) -> vec2<f32>;
     fn as_r32(&self) -> vec2<R32>;
 }
 
+/// A trait for converting [mat3]'s inner types between [f32] and [R32].
 pub trait Mat3RealConversions {
     fn as_f32(&self) -> mat3<f32>;
     fn as_r32(&self) -> mat3<R32>;

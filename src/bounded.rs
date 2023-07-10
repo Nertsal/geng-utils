@@ -9,6 +9,11 @@ pub struct Bounded<T> {
 }
 
 impl<T: Num> Bounded<T> {
+    /// Construct a new non-zero value with max set to be the initial value.
+    pub fn new_max(value: T) -> Self {
+        Self::new(value, T::ZERO..=value)
+    }
+
     /// Construct a new value bounded by the given `range`.
     pub fn new(value: T, range: std::ops::RangeInclusive<T>) -> Self {
         Self {

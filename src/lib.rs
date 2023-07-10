@@ -12,5 +12,7 @@ pub mod layout;
 pub mod pixel;
 /// Common operations with textures.
 pub mod texture;
+/// Generating tiled geometry.
+pub mod tiled;
 /// Operations for handling torus worlds.
 pub mod torus;

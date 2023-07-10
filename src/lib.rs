@@ -6,6 +6,8 @@ pub mod conversions;
 pub mod geometry;
 /// A possibly more convenient key enum.
 pub mod key;
+/// Layout utils.
+pub mod layout;
 /// Operations useful for pixel art.
 pub mod pixel;
 /// Common operations with textures.

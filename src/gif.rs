@@ -8,10 +8,12 @@ pub struct GifFrame {
 }
 
 /// GIF load options.
+#[derive(Debug, Clone, Default)]
 pub struct GifOptions {
     pub frame: geng::asset::TextureOptions,
 }
 
+/// Load GIF frame from the given file path.
 pub async fn load_gif(
     manager: &geng::asset::Manager,
     path: impl AsRef<std::path::Path>,

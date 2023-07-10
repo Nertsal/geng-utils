@@ -114,6 +114,7 @@ pub fn draw_texture_fit_screen_height(
     );
 }
 
+/// Draw a texture in a pixel-perfect way: such that pixels of the texture align with the pixels of the framebuffer.
 pub fn draw_pixel_perfect(
     texture: &ugli::Texture,
     pos: vec2<f32>,

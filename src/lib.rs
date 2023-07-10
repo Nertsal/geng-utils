@@ -4,6 +4,8 @@ pub mod bounded;
 pub mod conversions;
 /// Some primitive geometric shapes.
 pub mod geometry;
+/// GIF loader.
+pub mod gif;
 /// A possibly more convenient key enum.
 pub mod key;
 /// Layout utils.

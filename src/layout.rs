@@ -7,19 +7,34 @@ pub fn aabb_pos<T: Float>(aabb: Aabb2<T>, align: vec2<T>) -> vec2<T> {
     aabb.min + aabb.size() * align
 }
 
+/// Align an aabb of the given size inside another.
+pub fn align_aabb<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
+    let half = T::from_f32(0.5);
+    let pos_aabb = aabb.extend_symmetric(-size * half);
+    let pos = aabb_pos(pos_aabb, align);
+    Aabb2::point(pos).extend_symmetric(size * half)
+}
+
 /// Fit an aabb of the given size into the given aabb.
 pub fn fit_aabb<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
-    let half = T::from_f32(0.5);
-    let target_size = aabb.size();
-
-    let ratio = target_size / size;
+    let ratio = aabb.size() / size;
     let ratio = if ratio.x < ratio.y { ratio.x } else { ratio.y };
     let fit_size = size * ratio;
+    align_aabb(fit_size, aabb, align)
+}
 
-    let pos_aabb = aabb.extend_symmetric(-fit_size * half);
-    let pos = aabb_pos(pos_aabb, align);
+/// Fit an aabb of the given size by width into the given aabb.
+pub fn fit_aabb_width<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
+    let ratio = aabb.width() / size.x;
+    let fit_size = size * ratio;
+    align_aabb(fit_size, aabb, align)
+}
 
-    Aabb2::point(pos).extend_symmetric(fit_size * half)
+/// Fit an aabb of the given size by height into the given aabb.
+pub fn fit_aabb_height<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
+    let ratio = aabb.height() / size.y;
+    let fit_size = size * ratio;
+    align_aabb(fit_size, aabb, align)
 }
 
 #[test]

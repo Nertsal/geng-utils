@@ -113,3 +113,22 @@ pub fn draw_texture_fit_screen_height(
         framebuffer,
     );
 }
+
+pub fn draw_pixel_perfect(
+    texture: &ugli::Texture,
+    pos: vec2<f32>,
+    align: vec2<f32>,
+    camera: &impl geng::AbstractCamera2d,
+    geng: &Geng,
+    framebuffer: &mut ugli::Framebuffer,
+) {
+    let pos = crate::pixel::pixel_perfect_aabb(
+        pos,
+        align,
+        texture.size(),
+        camera,
+        framebuffer.size().as_f32(),
+    );
+    geng.draw2d()
+        .textured_quad(framebuffer, camera, pos, texture, Rgba::WHITE);
+}

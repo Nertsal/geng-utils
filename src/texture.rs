@@ -39,7 +39,7 @@ pub fn draw_texture_fit(
 pub fn draw_texture_fit_width(
     texture: &ugli::Texture,
     target: Aabb2<f32>,
-    align: vec2<f32>,
+    align: f32,
     camera: &impl geng::AbstractCamera2d,
     geng: &Geng,
     framebuffer: &mut ugli::Framebuffer,
@@ -53,7 +53,7 @@ pub fn draw_texture_fit_width(
 pub fn draw_texture_fit_height(
     texture: &ugli::Texture,
     target: Aabb2<f32>,
-    align: vec2<f32>,
+    align: f32,
     camera: &impl geng::AbstractCamera2d,
     geng: &Geng,
     framebuffer: &mut ugli::Framebuffer,
@@ -83,7 +83,7 @@ pub fn draw_texture_fit_screen(
 /// Fit a texture to the width of the framebuffer.
 pub fn draw_texture_fit_screen_width(
     texture: &ugli::Texture,
-    align: vec2<f32>,
+    align: f32,
     geng: &Geng,
     framebuffer: &mut ugli::Framebuffer,
 ) {
@@ -100,7 +100,7 @@ pub fn draw_texture_fit_screen_width(
 /// Fit a texture to the height of the framebuffer.
 pub fn draw_texture_fit_screen_height(
     texture: &ugli::Texture,
-    align: vec2<f32>,
+    align: f32,
     geng: &Geng,
     framebuffer: &mut ugli::Framebuffer,
 ) {

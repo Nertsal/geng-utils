@@ -24,17 +24,17 @@ pub fn fit_aabb<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb
 }
 
 /// Fit an aabb of the given size by width into the given aabb.
-pub fn fit_aabb_width<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
+pub fn fit_aabb_width<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: T) -> Aabb2<T> {
     let ratio = aabb.width() / size.x;
     let fit_size = size * ratio;
-    align_aabb(fit_size, aabb, align)
+    align_aabb(fit_size, aabb, vec2(T::ZERO, align))
 }
 
 /// Fit an aabb of the given size by height into the given aabb.
-pub fn fit_aabb_height<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: vec2<T>) -> Aabb2<T> {
+pub fn fit_aabb_height<T: Float>(size: vec2<T>, aabb: Aabb2<T>, align: T) -> Aabb2<T> {
     let ratio = aabb.height() / size.y;
     let fit_size = size * ratio;
-    align_aabb(fit_size, aabb, align)
+    align_aabb(fit_size, aabb, vec2(align, T::ZERO))
 }
 
 #[test]

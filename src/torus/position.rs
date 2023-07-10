@@ -112,5 +112,8 @@ fn test_delta() {
     let world_size = vec2(20.0, 10.0);
     let a = PositionTorus::from_world(vec2(15.0, 1.0), world_size);
     let b = PositionTorus::from_world(vec2(10.0, 5.0), world_size);
-    // assert!();
+    let c = PositionTorus::from_world(vec2(2.0, 7.0), world_size);
+    assert_eq!(a.delta_to(b), vec2(-5.0, 4.0));
+    assert_eq!(a.delta_to(c), vec2(7.0, -4.0));
+    assert_eq!(b.delta_to(c), vec2(-8.0, 2.0));
 }

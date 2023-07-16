@@ -1,19 +1,14 @@
 use geng::prelude::*;
 
 /// A value bounded by a closed interval.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Bounded<T> {
     value: T,
     min: T,
     max: T,
 }
 
-impl<T: Num> Bounded<T> {
-    /// Construct a new non-zero value with max set to be the initial value.
-    pub fn new_max(value: T) -> Self {
-        Self::new(value, T::ZERO..=value)
-    }
-
+impl<T: PartialOrd + Copy> Bounded<T> {
     /// Construct a new value bounded by the given `range`.
     pub fn new(value: T, range: std::ops::RangeInclusive<T>) -> Self {
         Self {
@@ -22,11 +17,6 @@ impl<T: Num> Bounded<T> {
             max: *range.end(),
         }
         .normalized()
-    }
-
-    fn normalized(self) -> Self {
-        let value = self.value.clamp_range(self.min..=self.max);
-        Self { value, ..self }
     }
 
     pub fn value(&self) -> T {
@@ -39,6 +29,19 @@ impl<T: Num> Bounded<T> {
 
     pub fn max(&self) -> T {
         self.max
+    }
+
+    pub fn map<U>(&mut self, f: impl Fn(T) -> U) -> Bounded<U> {
+        Bounded {
+            value: f(self.value),
+            min: f(self.min),
+            max: f(self.max),
+        }
+    }
+
+    fn normalized(self) -> Self {
+        let value = self.value.clamp_range(self.min..=self.max);
+        Self { value, ..self }
     }
 
     /// Whether the value is at a maximum.
@@ -54,6 +57,13 @@ impl<T: Num> Bounded<T> {
     /// Whether the value is above minimum.
     pub fn is_above_min(&self) -> bool {
         self.value > self.min
+    }
+}
+
+impl<T: UNum> Bounded<T> {
+    /// Construct a new non-zero value with max set to be the initial value.
+    pub fn new_max(value: T) -> Self {
+        Self::new(value, T::ZERO..=value)
     }
 
     /// Changes the value by a `delta`, but keeps it in the interval.
@@ -73,6 +83,10 @@ impl<T: Float> Bounded<T> {
         } else {
             (self.value - self.min) / len
         }
+    }
+
+    pub fn set_ratio(&mut self, ratio: T) {
+        self.value = ratio.clamp_range(T::ZERO..=T::ONE) * (self.max - self.min) + self.min;
     }
 }
 

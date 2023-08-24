@@ -61,14 +61,25 @@ impl<T: PartialOrd + Copy> Bounded<T> {
 }
 
 impl<T: UNum> Bounded<T> {
-    /// Construct a new non-zero value with max set to be the initial value.
+    /// Construct a new non-negative value with max set to be the initial value.
     pub fn new_max(value: T) -> Self {
         Self::new(value, T::ZERO..=value)
+    }
+
+    /// Construct a new non-negative value with a given max and initial value set to zero.
+    pub fn new_zero(max: T) -> Self {
+        Self::new(T::ZERO, T::ZERO..=max)
     }
 
     /// Changes the value by a `delta`, but keeps it in the interval.
     pub fn change(&mut self, delta: T) {
         self.value += delta;
+        *self = self.normalized();
+    }
+
+    /// Sets the value after clamping it by the bounds.
+    pub fn set(&mut self, value: T) {
+        self.value = value;
         *self = self.normalized();
     }
 }

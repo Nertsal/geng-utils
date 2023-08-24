@@ -1,5 +1,5 @@
 [package]
-name = "geng_utils"
+name = "geng-utils"
 authors = ["Nertsal <nestralnertsal@gmail.com>"]
 version = "0.1.0"
 description = "A collection of utilities for Geng engine."

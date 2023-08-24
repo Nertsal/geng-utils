@@ -7,7 +7,7 @@ documentation = "https://docs.rs/geng-utils"
 edition = "2021"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/Nertsal/geng_utils"
+repository = "https://github.com/Nertsal/geng-utils"
 keywords = ["game", "utility", "gamedev", "geng"]
 categories = ["game-development"]
 

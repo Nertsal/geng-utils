@@ -6,6 +6,7 @@ jobs:
   test-native:
     name: Test
     runs-on: ubuntu-latest
+    container: kuviman/geng
     steps:
       - name: Checkout
         uses: actions/checkout@v3

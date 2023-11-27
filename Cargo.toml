@@ -1,7 +1,7 @@
 [package]
 name = "geng-utils"
 authors = ["Nertsal <nestralnertsal@gmail.com>"]
-version = "0.2.0"
+version = "0.3.0"
 description = "A collection of utilities for Geng engine."
 documentation = "https://docs.rs/geng-utils"
 edition = "2021"
@@ -12,6 +12,6 @@ keywords = ["game", "utility", "gamedev", "geng"]
 categories = ["game-development"]
 
 [dependencies]
-geng = "0.16"
+geng = ">=0.15"
 image = "0.24.6"
 serde = { version = "1", features = ["derive"] }

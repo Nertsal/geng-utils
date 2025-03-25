@@ -8,6 +8,8 @@ pub mod conversions;
 pub mod geometry;
 /// GIF loader.
 pub mod gif;
+/// Different interpolation algorithms.
+pub mod interpolation;
 /// A possibly more convenient key enum.
 pub mod key;
 /// Layout utils.

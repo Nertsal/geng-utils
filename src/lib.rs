@@ -1,3 +1,5 @@
+//! A collection of utilities to use with [geng](https://github.com/geng-engine/geng) engine.
+
 /// Bounded value.
 pub mod bounded;
 /// Handy conversion between types.

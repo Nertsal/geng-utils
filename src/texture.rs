@@ -29,7 +29,9 @@ pub struct DrawTexture<'a> {
     pub target: Aabb2<f32>,
     /// Color to render the texture with.
     pub color: Rgba<f32>,
-    // TODO: DrawParameters
+    /// Extra transformations applied before drawing.
+    pub transform: mat3<f32>,
+    // pub parameters: ugli::DrawParameters, // TODO: when geng allows passing parameters
 }
 
 impl<'a> DrawTexture<'a> {
@@ -38,11 +40,17 @@ impl<'a> DrawTexture<'a> {
             texture,
             target: Aabb2::ZERO.extend_positive(texture.size().as_f32()),
             color: Rgba::WHITE,
+            transform: mat3::identity(),
+            // parameters: ugli::DrawParameters::default(),
         }
     }
 
     pub fn colored(self, color: Rgba<f32>) -> Self {
         Self { color, ..self }
+    }
+
+    pub fn transformed(self, transform: mat3<f32>) -> Self {
+        Self { transform, ..self }
     }
 
     /// Fit into the target [Aabb2] in world space and align.
@@ -87,22 +95,31 @@ impl<'a> DrawTexture<'a> {
         )
     }
 
+    // /// Specifying the [DrawParameters](ugli::DrawParameters) to use when rendering.
+    // pub fn with_parameters(self, parameters: ugli::DrawParameters) -> Self {
+    //     Self { parameters, ..self }
+    // }
+
     /// Align to pixel-perfect: such that pixels of the texture align with the pixels of the framebuffer.
     pub fn pixel_perfect(
         self,
         pos: vec2<f32>,
         align: vec2<f32>,
+        pixel_scale: f32,
         camera: &impl geng::AbstractCamera2d,
         framebuffer: &mut ugli::Framebuffer,
     ) -> Self {
-        let target = crate::pixel::pixel_perfect_aabb(
-            pos,
-            align,
-            self.texture.size(),
-            camera,
-            framebuffer.size().as_f32(),
-        );
+        let size = (self.texture.size().as_f32() * pixel_scale).map(|x| x.round() as usize);
+        let target =
+            crate::pixel::pixel_perfect_aabb(pos, align, size, camera, framebuffer.size().as_f32());
         Self { target, ..self }
+    }
+
+    pub fn as_textured_quad(self) -> draw2d::TexturedQuad<&'a ugli::Texture> {
+        let transform = mat3::translate(self.target.center())
+            * self.transform
+            * mat3::scale(self.target.size() / 2.0);
+        draw2d::TexturedQuad::unit_colored(self.texture, self.color).transform(transform)
     }
 
     pub fn draw(
@@ -112,6 +129,6 @@ impl<'a> DrawTexture<'a> {
         framebuffer: &mut ugli::Framebuffer,
     ) {
         geng.draw2d()
-            .textured_quad(framebuffer, camera, self.target, self.texture, self.color);
+            .draw2d(framebuffer, camera, &self.as_textured_quad());
     }
 }

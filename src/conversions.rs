@@ -1,4 +1,4 @@
-use geng::prelude::{mat3, r32, vec2, Aabb2, Angle, Float, R32, R64};
+use geng::prelude::{Aabb2, Angle, Float, R32, R64, mat3, r32, vec2};
 
 /// A trait for converting into an [R32].
 pub trait RealConversions {

@@ -17,4 +17,4 @@ image = "0.25.2"
 serde = { version = "1", features = ["derive"] }
 
 [patch.crates-io]
-geng = { git = "https://github.com/geng-engine/geng", rev = "ad453b8b1023ad5ac6992309efb11b0e038c8cfb" } # TODO: remove once 0.18 is on crates
+geng = { git = "https://github.com/geng-engine/geng", rev = "3a94dac77da86049059d5fbb21a4feb916d67c22" } # TODO: remove once 0.18 is on crates

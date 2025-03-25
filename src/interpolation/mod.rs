@@ -1,8 +1,14 @@
 mod bezier;
+mod sod;
 mod spline;
 mod uniform;
 
-pub use self::{bezier::Bezier, spline::Spline, uniform::calculate_uniform_transformation};
+pub use self::{
+    bezier::Bezier,
+    sod::{SecondOrderDynamics, SecondOrderState},
+    spline::Spline,
+    uniform::calculate_uniform_transformation,
+};
 
 use geng::prelude::*;
 

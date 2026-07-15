@@ -4,7 +4,7 @@ authors = ["Nertsal <nestralnertsal@gmail.com>"]
 version = "0.4.0"
 description = "A collection of utilities for Geng engine."
 documentation = "https://docs.rs/geng-utils"
-edition = "2021"
+edition = "2024"
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/Nertsal/geng-utils"
@@ -13,8 +13,8 @@ categories = ["game-development"]
 
 [dependencies]
 geng = "0.18"
-image = "0.25.2"
+image = "0.25"
 serde = { version = "1", features = ["derive"] }
 
 [patch.crates-io]
-geng = { git = "https://github.com/geng-engine/geng", rev = "3a94dac77da86049059d5fbb21a4feb916d67c22" } # TODO: remove once 0.18 is on crates
+geng = { git = "https://github.com/geng-engine/geng", rev = "1e35585545463c919ff0da849af4fdad69ab02fa" } # TODO: remove once 0.18 is on crates

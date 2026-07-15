@@ -16,6 +16,8 @@ pub mod key;
 pub mod layout;
 /// Operations useful for pixel art.
 pub mod pixel;
+/// Asynchronous tasks wrapped in a sync API.
+pub mod task;
 /// Common operations with textures.
 pub mod texture;
 /// Generating tiled geometry.

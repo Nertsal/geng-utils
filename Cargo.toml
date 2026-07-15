@@ -12,6 +12,8 @@ keywords = ["game", "utility", "gamedev", "geng"]
 categories = ["game-development"]
 
 [dependencies]
+async-compat = "0.2"
+async-executor = "1"
 geng = "0.18"
 image = "0.25"
 serde = { version = "1", features = ["derive"] }

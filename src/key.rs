@@ -1,6 +1,6 @@
 use geng::{
-    prelude::{Deserialize, Serialize},
     Window,
+    prelude::{Deserialize, Serialize},
 };
 
 /// A convenience type that combines [Key](geng::Key) and [MouseButton](geng::MouseButton).

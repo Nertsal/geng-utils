@@ -1,5 +1,19 @@
 use geng::prelude::{Aabb2, Angle, Float, R32, R64, mat3, mat4, r32, vec2, vec3, vec4};
 
+pub trait ResultUnwrapEitherExt {
+    type Value;
+    fn unwrap_either(self) -> Self::Value;
+}
+
+impl<T> ResultUnwrapEitherExt for Result<T, T> {
+    type Value = T;
+    fn unwrap_either(self) -> Self::Value {
+        match self {
+            Ok(t) | Err(t) => t,
+        }
+    }
+}
+
 /// A trait for converting into an [R32].
 pub trait RealConversions {
     fn as_r32(&self) -> R32;
@@ -133,4 +147,12 @@ impl<T: Float> Mat4RealConversions for mat4<T> {
     fn as_r32(&self) -> mat4<R32> {
         self.map(|x| r32(x.as_f32()))
     }
+}
+
+#[test]
+fn test_unwrap_either() {
+    let result: Result<i32, i32> = Ok(1);
+    assert_eq!(result.unwrap_either(), 1);
+    let result: Result<i32, i32> = Err(2);
+    assert_eq!(result.unwrap_either(), 2);
 }

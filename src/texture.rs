@@ -1,6 +1,6 @@
 use geng::prelude::*;
 
-use crate::conversions::Vec2RealConversions;
+use crate::{conversions::Vec2RealConversions, layout::AreaOps};
 
 /// Construct a new black texture of the given size.
 pub fn new_texture(ugli: &Ugli, size: vec2<usize>) -> ugli::Texture {
@@ -55,19 +55,19 @@ impl<'a> DrawTexture<'a> {
 
     /// Fit into the target [Aabb2] in world space and align.
     pub fn fit(self, target: Aabb2<f32>, align: vec2<f32>) -> Self {
-        let target = crate::layout::fit_aabb(self.texture.size().as_f32(), target, align);
+        let target = target.fit_aabb(self.texture.size().as_f32(), align);
         Self { target, ..self }
     }
 
     /// Fit into the target [Aabb2] by width in world space and align vertically.
     pub fn fit_width(self, target: Aabb2<f32>, align: f32) -> Self {
-        let target = crate::layout::fit_aabb_width(self.texture.size().as_f32(), target, align);
+        let target = target.fit_aabb_width(self.texture.size().as_f32(), align);
         Self { target, ..self }
     }
 
     /// Fit into the target [Aabb2] by height in world space and align horizontally.
     pub fn fit_height(self, target: Aabb2<f32>, align: f32) -> Self {
-        let target = crate::layout::fit_aabb_height(self.texture.size().as_f32(), target, align);
+        let target = target.fit_aabb_height(self.texture.size().as_f32(), align);
         Self { target, ..self }
     }
 
